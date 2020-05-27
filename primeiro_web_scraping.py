@@ -1,3 +1,5 @@
+# Eduardo de Morais Levandovski
+# ----------------------------------------------------------------------
 import os
 os.system('cls||clear')
 print('\n')
