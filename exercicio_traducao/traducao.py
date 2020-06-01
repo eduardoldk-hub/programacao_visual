@@ -22,7 +22,7 @@ translator = Translator()
 
 #Idioma em que se econtra o texto.
 idioma_do_arquivo = translator.detect(texto_do_arquivo)
-print(f"Nome do arquivo: {nome_arquivo}\nIdioma do arquivo: {idioma_do_arquivo}\n")
+print(f"Nome do arquivo: {nome_arquivo.name}\nIdioma do arquivo: {idioma_do_arquivo}\n")
 
 
 #Menu com possiveis idiomas.
