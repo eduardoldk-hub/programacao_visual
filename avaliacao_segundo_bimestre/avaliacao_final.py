@@ -297,8 +297,7 @@ def logar_ava(usuario, senha, data):
 
     #clica na sessão
     try:
-        navegador.find_element_by_link_text(data).click()
-        clique.click()
+        navegador.find_element_by_xpath("//div/a[@class='mod-link' and contains(@href, '%s')]").click()
     except:
         print("[ERROR] - Não foi possivel entrar na sessão da aula.")
     else:
@@ -320,6 +319,7 @@ def logar_ava(usuario, senha, data):
             print("[ERROR] - Não existe nenhuma aula para essa sessão.")
             print("[FATAL ERROR] - O programa irá reiniciar em 6 segundos.")
             time.sleep(6)
+            navegador.close()
             restart_program()
     else:
         print("[OK] - Abrindo a sessão de aula.")
