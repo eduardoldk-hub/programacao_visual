@@ -362,7 +362,7 @@ def logar_ava(usuario, senha, data):
     #clica na sessão
     time.sleep(2)
     try:
-        clique = navegador.find_element_by_tag_name('//div[@a="Aula"]')
+        clique = navegador.find_elements_by_xpath('//li[@class="snap-activity snap-asset activity collaborate modtype_collaborate"]//div[@class="snap-asset-content"]/h3/a[href|=https://uec.mrooms.net/mod/collaborate/view]')
         clique.click()
     except:
         print("[ERROR] - Não foi possivel entrar na sessão da aula.")
@@ -380,30 +380,34 @@ def logar_ava(usuario, senha, data):
         try:
             clique = navegador.find_element_by_xpath('//*[@id="region-main"]/div[1]/div[2]/ul/li/a[1]')
             clique.click()
-            print("[OK] - Abrindo sessão de aula gravada.")
+            
         except:
             print("[ERROR] - Não existe nenhuma aula para essa sessão.")
             print("[FATAL ERROR] - O programa irá reiniciar em 6 segundos.")
             time.sleep(6)
             navegador.close()
             restart_program()
+        else:
+            print("[OK] - Abrindo sessão de aula gravada.")
+            
     else:
         print("[OK] - Abrindo a sessão de aula.")
+        # fecha a janela de configuração de audio e video.
+        time.sleep(30)
+        iteracao = 1
+        while iteracao > 0:
+            try:
+                clique = navegador.find_element_by_xpath('//*[@id="techcheck-modal"]/button')
+                clique.click()
+                print("[OK] - Fechando janela de configuração do microfone e camera")
+            except:
+                print(f"[ERROR] - Não foi possivel fechar a janela de configuração de microfone e camera. Outra tentativa ocorrerá em [{iteracao}]")
+                time.sleep(iteracao)
+                iteracao += 1
+            else:
+                iteracao = 0
 
-    # fecha a janela de configuração de audio e video.
-    time.sleep(30)
-    iteracao = 1
-    while iteracao > 0:
-        try:
-            clique = navegador.find_element_by_xpath('//*[@id="techcheck-modal"]/button')
-            clique.click()
-            print("[OK] - Fechando janela de configuração do microfone e camera")
-        except:
-            print(f"[ERROR] - Não foi possivel fechar a janela de configuração de microfone e camera. Outra tentativa ocorrerá em [{iteracao}]")
-            time.sleep(iteracao)
-            iteracao += 1
-        else:
-            iteracao = 0
+
 
 
 #   apresentação -------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------
